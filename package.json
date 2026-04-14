@@ -1,20 +1,17 @@
 {
-  "name": "goaltrees-d3",
-  "version": "0.0.1",
+  "name": "magnetic-crane",
+  "version": "0.0.2",
+  "type": "module",
   "dependencies": {
-    "amdefine": "^1.0.0",
-    "d3": "^3.5.13",
-    "express": "^4.13.4",
-    "requirejs": "^2.1.22"
+    "d3": "^7.9.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
-  },
-  "engines": {
-    "node": "v0.10.32"
+    "mocha": "^2.4.5",
+    "parcel": "^2.16.4"
   },
   "scripts": {
-    "postinstall": "node init.js"
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   }
 }

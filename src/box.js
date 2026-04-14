@@ -1,24 +1,16 @@
-if (typeof define !== 'function') {
-    var define = require('amdefine')(module)
+export default function Box(name, color, x, y, height, width) {
+    this.name = name;
+    this.color = color;
+    this.x = x;
+    this.y = y;
+    this.height = height;
+    this.width = width;
 }
 
-define(function () {
+Box.prototype.getHeight = function () {
+    return this.height;
+};
 
-    function Box(name, color, x, y, height, width) {
-        this.name = name;
-        this.color = color;
-        this.x = x;
-        this.y = y;
-        this.height = height;
-        this.width = width;
-    }
-
-    Box.prototype.getHeight = function () {
-        return this.height;
-    };
-    Box.prototype.getWidth = function () {
-        return this.width;
-    };
-
-    return Box;
-});
+Box.prototype.getWidth = function () {
+    return this.width;
+};

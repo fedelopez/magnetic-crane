@@ -1,10 +1,10 @@
-describe("goaltrees-d3", function () {
+import Box from "../src/box.js";
+import BoxPile from "../src/box_pile.js";
+import State from "../src/state.js";
+import chai from "chai";
+const { expect } = chai;
 
-    var Box = require("../src/box");
-    var BoxPile = require("../src/box_pile");
-    var State = require("../src/state");
-    var Step = require("../src/step");
-    var expect = require('chai').expect;
+describe("magnetic-crane", function () {
 
     describe("state: nextState", function () {
 

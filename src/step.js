@@ -1,27 +1,17 @@
-if (typeof define !== 'function') {
-    var define = require('amdefine')(module)
+export default function Step(box, dstX, dstY) {
+    this._box = box;
+    this._dstX = dstX;
+    this._dstY = dstY;
 }
 
-define(function () {
+Step.prototype.getBox = function () {
+    return this._box;
+};
 
-    function Step(box, dstX, dstY) {
-        this._box = box;
-        this._dstX = dstX;
-        this._dstY = dstY;
-    }
+Step.prototype.getDstX = function () {
+    return this._dstX;
+};
 
-    Step.prototype.getBox = function () {
-        return this._box;
-    };
-
-    Step.prototype.getDstX = function () {
-        return this._dstX;
-    };
-
-    Step.prototype.getDstY = function () {
-        return this._dstY;
-    };
-
-    return Step;
-
-});
+Step.prototype.getDstY = function () {
+    return this._dstY;
+};
