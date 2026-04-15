@@ -22,6 +22,8 @@ const magnetHookH = 15;
 const terrainW = baseLineW;
 const terrainH = maxBoxH * 4;
 
+const limitY = (terrainH - maxBoxH) / boxH;
+
 const terrain = BoxPile.createTerrain(terrainW, terrainH);
 const moveCommand = new MoveCommand();
 
@@ -254,18 +256,22 @@ function resetCrane(callback) {
 
 function moveBoxClicked() {
     if (moveCommand.canMove()) {
+        const isTop = moveCommand.getWhere().includes("top");
         const dstX = moveCommand.getDstBox().x;
-        //TODO possible bug indexOf('top')
-        const dstY = moveCommand.getDstBox().height * (moveCommand.getWhere().indexOf("top") ? moveCommand.getDstBox().y + 1 : moveCommand.getDstBox().y);
-        const steps = BoxPile.moveBox(new State(terrain), moveCommand.getSrcBox(), dstX, dstY);
-        console.log("Number of steps: " + steps.length);
-        attachCrane(steps.slice(), dstX, dstY, function () {
-            steps.forEach(function (step) {
-                const box = terrain.getBoxByName(step.getBox().name);
-                box.x = step.getDstX();
-                box.y = step.getDstY();
+        const dstY = isTop ? moveCommand.getDstBox().y + moveCommand.getDstBox().height : moveCommand.getDstBox().y;
+        if (dstY < limitY) {
+            const steps = BoxPile.moveBox(new State(terrain), moveCommand.getSrcBox(), dstX, dstY);
+            console.log(`"(dstX, dstY): (${dstX}, ${dstY}), Number of steps: ${steps.length}`);
+            attachCrane(steps.slice(), dstX, dstY, function () {
+                steps.forEach(function (step) {
+                    const box = terrain.getBoxByName(step.getBox().name);
+                    box.x = step.getDstX();
+                    box.y = step.getDstY();
+                });
             });
-        });
+        } else {
+            console.warn(`dstY out of bounds: (${dstX}, ${dstY})`);
+        }
     }
 }
 
